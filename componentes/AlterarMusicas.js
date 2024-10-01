@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert } from 'reac
 import { firestore } from "../Firebase";
 import { collection, doc, updateDoc } from "firebase/firestore";
 
-export default function AlterarMusica({navigation, route}) {
+export default function alterarMusica({navigation, route}) {
 
     const id = route.params.id;
 
@@ -12,7 +12,7 @@ export default function AlterarMusica({navigation, route}) {
     const [albumMusica, setAlbumMusica] = useState(route.params.albumMusica);
 
 
-    async function alterarCripto(id, nomeMusica, autorMusica, albumMusica) {
+    async function alterarMusica(id, nomeMusica, autorMusica, albumMusica) {
         try {
             await updateDoc(doc(collection(firestore, "tbmoeda"), id), {
                 nomeMusica: nomeMusica,
@@ -58,7 +58,7 @@ export default function AlterarMusica({navigation, route}) {
         input: {
             marginVertical: 10,
             marginHorizontal: 10,
-            backgroundColor: '#9ac234',
+            backgroundColor:'#87CEFA',
             paddingHorizontal: 20,
             paddingVertical: 10,
             fontSize: 15,

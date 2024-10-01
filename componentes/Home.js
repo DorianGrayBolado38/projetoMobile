@@ -1,114 +1,112 @@
-import React,{ useEffect, useState } from "react";
-import { View,Text,StyleSheet,FlatList, TouchableOpacity,Alert } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, Alert, ImageBackground } from "react-native";
 import { firestore } from "../Firebase"; 
 import { collection, onSnapshot, deleteDoc, doc } from "firebase/firestore"; 
 
-export default function Home({navigation}) {
-           
+export default function Home({ navigation }) {
     const [musicas, setmusicas] = useState([]);
 
     async function deleteCripto(id) {
-        try{
-            await deleteDoc(doc(firestore,'Músicas',id));
-            Alert.alert("A musica foi deletada.")
-        }catch(error){
-            console.error("Erro ao deletar.", error)
+        try {
+            await deleteDoc(doc(firestore, 'Músicas', id));
+            Alert.alert("A música foi deletada.");
+        } catch (error) {
+            console.error("Erro ao deletar.", error);
         }
     }
-       
-    useEffect(()=>{
-        const unsubcribe = onSnapshot(collection(firestore,'Músicas'),(querySnapshot)=>{
+
+    useEffect(() => {
+        const unsubcribe = onSnapshot(collection(firestore, 'Músicas'), (querySnapshot) => {
             const lista = [];
-            querySnapshot.forEach((doc)=>{
-                lista.push({...doc.data(), id: doc.id});
+            querySnapshot.forEach((doc) => {
+                lista.push({ ...doc.data(), id: doc.id });
             });
             setmusicas(lista);
         });
         return () => unsubcribe();
-    },[]);
+    }, []);
 
-    return(
-        <View style={estilo.container}>
+    return (
+        <ImageBackground 
+            source={require('../componentes/imagens/rave.jpg')} // Altere o caminho para o local correto da imagem
+            style={estilo.container}
+            resizeMode="cover"
+        >
             <View>
-                <Text style={estilo.titulo} >Lista de Musicas</Text>
+                <Text style={estilo.titulo}>Lista de Músicas</Text>
             </View>
             <FlatList 
                 data={musicas}
-                renderItem={({item})=>{
-                    return(
+                renderItem={({ item }) => {
+                    return (
                         <View style={estilo.musicas}>
-                            <TouchableOpacity onPress={()=>navigation.navigate("Alterar",{
+                            <TouchableOpacity onPress={() => navigation.navigate("Alterar", {
                                 id: item.id,
-                                NomeMusica: item.NomeMusica,
-                                AutorMusica: item.AutorMusica,
-                                AlbumMusica: item.AlbumMusica
+                                NomeMusica: item.nomeMusica,
+                                AutorMusica: item.autorMusica,
+                                AlbumMusica: item.albumMusica
                             })}>
                                 <View style={estilo.itens}>
-                                    <Text> Nome: <Text>{item.NomeMusica}</Text></Text>
-                                    <Text> Autor: <Text>{item.AutorMusica}</Text></Text>
-                                    <Text> Album: <Text>{item.AlbumMusica}</Text></Text>
+                                    <Text>Nome: <Text>{item.nomeMusica}</Text></Text>
+                                    <Text>Autor: <Text>{item.autorMusica}</Text></Text>
+                                    <Text>Álbum: <Text>{item.albumMusica}</Text></Text>
                                 </View>
                             </TouchableOpacity>
                             <View style={estilo.botaodeletar}>
-                                <TouchableOpacity onPress={()=>{deleteCripto(item.id)}}>
-                                <Text>X</Text>
+                                <TouchableOpacity onPress={() => { deleteCripto(item.id) }}>
+                                    <Text>X</Text>
                                 </TouchableOpacity>    
                             </View>    
                         </View>    
                     );
                 }}
             />
-            <TouchableOpacity onPress={()=> navigation.navigate("Cadastrar")}>
+            <TouchableOpacity onPress={() => navigation.navigate("Cadastrar")}>
                 <Text>+</Text>
             </TouchableOpacity>
-        </View>
+        </ImageBackground >
     );
 }
 
 const estilo = StyleSheet.create({
-    container:{
-      flex:1,
-      justifyContent: 'center',
-      alignItems: 'center'
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
-    titulo:{
-      marginTop: 50,
-      fontSize:30,
+    titulo: {
+        marginTop: 50,
+        fontSize: 30,
+        color: '#87CEFA', 
+        backgroundColor:'black',
+        border:'#87CEFA',
+        borderRadius:5,
     },
-    itens:{
-      marginHorizontal: 10,
-      marginVertical: 10,
-      padding: 10,
-     
+    itens: {
+        marginHorizontal: 10,
+        marginVertical: 10,
+        padding: 10,
     },
-    titulomusicas:{
-    fontSize: 13,
-    color:'#fff'
+    musicas: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginHorizontal: 10,
+        marginVertical: 10,
+        padding: 10,
+        backgroundColor: '#87CEFA',
+        borderRadius: 10,
     },
-    textomusicas:{
-    fontSize: 20,
-    fontWeight: "bold",
+    botaodeletar: {
+        textAlignVertical: 'center',
+        marginVertical: 20,
     },
-    musicas:{
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      marginHorizontal: 10,
-      marginVertical: 10,
-      padding: 10,
-      backgroundColor: '#fff',
-      borderRadius:10
+    addbutton: {
+        backgroundColor: '#ffffff',
+        borderRadius: 50,
+        position: 'absolute',
+        left: 20,
+        bottom: 40,
+        justifyContent: "center",
+        alignItems: "center",
     },
-    botaodeletar:{
-      textAlignVertical: 'center',
-      marginVertical: 20
-    },
-    addbutton:{
-    backgroundColor: '#ffffff',
-    borderRadius: 50,
-    position: 'absolute',
-    left: 20,
-    bottom: 40,
-    justifyContent: "center",
-    alignItems: "center"
-    }
-    });
+});

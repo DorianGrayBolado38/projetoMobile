@@ -18,7 +18,7 @@ export default function CadastrarCriptos({navigation}) {
 
     async function addCripto() {
         try {
-            const docRef = await addDoc(collection(firestore, 'tbmoeda'), {
+            const docRef = await addDoc(collection(firestore, 'Músicas'), {
                 nomeMusica: nomeMusica,
                 autorMusica: autorMusica,
                 albumMusica: albumMusica
@@ -59,9 +59,9 @@ const estilo = StyleSheet.create({
         alignItems: 'center',
     },
     input: {
+        backgroundColor:'#87CEFA',
         marginVertical: 10,
         marginHorizontal: 10,
-        backgroundColor: '#9ac234',
         paddingHorizontal: 20,
         paddingVertical: 10,
         fontSize: 15,
@@ -69,6 +69,7 @@ const estilo = StyleSheet.create({
     },
     btnenviar: {
         marginTop: 20,
+        color:'#87CEFA',
     },
     btntxtenviar: {
         fontSize: 25,
