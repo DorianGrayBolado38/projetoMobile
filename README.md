@@ -1,10 +1,5 @@
-# Tela Home
-![image](https://github.com/user-attachments/assets/c6b42411-fb0b-497d-b3d7-bcaf1f671160)
-
-# Tela Alterar
-![image](https://github.com/user-attachments/assets/76fd9e46-0385-4ad6-ab29-3b8e3688c190)
-
-# Tela Cadastrar
-![image](https://github.com/user-attachments/assets/7850e101-fc1f-43a8-b05e-6f6c6b5bd90d)
-
-
+![homeComInfo](https://github.com/user-attachments/assets/e2f16ec1-5641-4852-8583-4d8efada3016)
+![firebase](https://github.com/user-attachments/assets/20b5c907-8f4b-4233-a16b-04eceb964e58)
+![homejs](https://github.com/user-attachments/assets/13f994a4-0541-4c15-8dc1-8fce4d731253)
+![cadastrojs](https://github.com/user-attachments/assets/b0a6a5e2-e560-45f8-ae64-2020d1da6fa4)
+![alterar](https://github.com/user-attachments/assets/46b6aca8-d215-4e5b-98fa-83330d914865)
